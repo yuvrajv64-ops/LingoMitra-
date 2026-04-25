@@ -3,24 +3,60 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MeltingPro+</title>
+
 <style>
-body { font-family: Arial; background:#0f172a; color:white; padding:15px;}
-button { padding:10px; margin:5px; width:100%; background:#22c55e; color:white; border:none;}
-.box { background:#1e293b; padding:10px; margin-top:10px;}
-input { width:100%; padding:8px; margin:5px 0;}
+body {
+  font-family: Arial;
+  background: linear-gradient(#0f172a, #020617);
+  color: white;
+  padding: 15px;
+}
+
+h1 {
+  text-align:center;
+  color:#22c55e;
+}
+
+button {
+  padding:12px;
+  margin:6px 0;
+  width:100%;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(#22c55e,#16a34a);
+  color:white;
+  font-size:16px;
+}
+
+input {
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+  border-radius:6px;
+  border:none;
+}
+
+.card {
+  background:#1e293b;
+  padding:12px;
+  margin-top:10px;
+  border-radius:10px;
+  box-shadow:0 0 10px #000;
+}
 </style>
 </head>
 
 <body>
 
-<h2>🔥 MeltingPro+ (CCM)</h2>
+<h1>🔥 MeltingPro+</h1>
 
-<button onclick="showCalc()">📊 Calculators</button>
-<button onclick="showKnow()">📘 Knowledge</button>
-<button onclick="showDefect()">⚠️ Defects</button>
+<button onclick="calcMenu()">📊 Calculators</button>
+<button onclick="knowMenu()">📘 Knowledge</button>
+<button onclick="defectMenu()">⚠️ Defects</button>
 
-<div id="content"></div>
+<div id="main"></div>
 
 <script src="app.js"></script>
+
 </body>
 </html>
