@@ -80,13 +80,18 @@ function defectMenu(){
 document.getElementById("main").innerHTML=`
 
 <div class="card">
-<button onclick="d(1)">Crack</button>
-<button onclick="d(2)">Surface Slag</button>
-<button onclick="d(3)">Porosity</button>
-<button onclick="d(4)">Pin Hole</button>
-<button onclick="d(5)">Blow Hole</button>
 
-<p id="def"></p>
+<h3>Select Defect</h3>
+
+<button onclick="showDefect('crack')">Crack</button>
+<button onclick="showDefect('slag')">Surface Slag</button>
+<button onclick="showDefect('porosity')">Porosity</button>
+<button onclick="showDefect('choking')">Nozzle Choking</button>
+<button onclick="showDefect('bulging')">Bulging</button>
+<button onclick="showDefect('breakout')">Breakout</button>
+
+<div id="defDetail"></div>
+
 </div>
 `
 }
@@ -102,3 +107,55 @@ if(x==5) text="Blow hole: Gas → Improve refining";
 
 document.getElementById("def").innerText=text;
 }
+
+const defects = {
+
+crack: {
+title: "Billet Crack",
+img: "https://i.imgur.com/8QZ7Z8F.jpg",
+cause: "High temperature, low cooling, high casting speed",
+effect: "Surface cracks, rejection in rolling",
+solution: "Reduce superheat, increase secondary cooling, control speed"
+},
+
+slag: {
+title: "Surface Slag",
+img: "https://i.imgur.com/1X5kXQp.jpg",
+cause: "Dirty metal, poor slag practice",
+effect: "Surface defect, rolling rejection",
+solution: "Improve slag removal, maintain clean metal"
+},
+
+porosity: {
+title: "Porosity",
+img: "https://i.imgur.com/yKQ9w9v.jpg",
+cause: "Gas (H2, O2), poor deoxidation",
+effect: "Internal holes, weak billet",
+solution: "Proper deoxidation, dry raw material"
+},
+
+choking: {
+title: "Nozzle Choking",
+img: "https://i.imgur.com/jv8Q7WJ.jpg",
+cause: "Low temperature, high inclusion",
+effect: "Flow stop, casting interruption",
+solution: "Increase temperature, clean nozzle"
+},
+
+bulging: {
+title: "Bulging",
+img: "https://i.imgur.com/Uc6V7gS.jpg",
+cause: "Low cooling, weak shell",
+effect: "Deformation of billet",
+solution: "Increase secondary cooling"
+},
+
+breakout: {
+title: "Breakout",
+img: "https://i.imgur.com/xYf3k1P.jpg",
+cause: "Thin shell, high temperature",
+effect: "Molten metal leakage (danger)",
+solution: "Reduce temp, proper mould cooling"
+}
+
+};
