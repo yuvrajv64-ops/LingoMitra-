@@ -1,107 +1,93 @@
-// 🔑 API KEY (yahan apni key daalo)
-const API_KEY = "YOUR_API_KEY_HERE";
+// 📊 CALCULATORS
+function showCalc() {
+  document.getElementById("content").innerHTML = `
+  <div class="box">
+    <h3>Casting Speed (Ton/hr)</h3>
+    <input id="ton" placeholder="Metal (Ton)">
+    <input id="time" placeholder="Time (min)">
+    <button onclick="calcSpeed()">Calculate</button>
+    <p id="res1"></p>
 
-// 🎯 Practice Data
-let levels = {
-  day1: [
-    "I am ready",
-    "I need water",
-    "I am going to the plant",
-    "I am learning English",
-    "I can do this"
-  ]
-};
+    <h3>Superheat</h3>
+    <input id="tap" placeholder="Tap Temp">
+    <input id="tundish" placeholder="Tundish Temp">
+    <button onclick="calcSuperheat()">Calculate</button>
+    <p id="res2"></p>
 
-let currentIndex = 0;
-
-// 🔊 SPEAK
-function speak(text) {
-  let speech = new SpeechSynthesisUtterance(text);
-  speech.lang = "en-US";
-  speech.rate = 0.8;
-  window.speechSynthesis.speak(speech);
+    <h3>Unit/Ton</h3>
+    <input id="unit" placeholder="Total Unit">
+    <input id="metal" placeholder="Total Ton">
+    <button onclick="calcUnit()">Calculate</button>
+    <p id="res3"></p>
+  </div>`;
 }
 
-// 🎯 Practice Start
-function startPractice() {
-  let sentence = levels.day1[currentIndex];
-  document.getElementById("en").innerText = sentence;
-  speak(sentence);
+// 📊 FUNCTIONS
+function calcSpeed() {
+  let ton = document.getElementById("ton").value;
+  let time = document.getElementById("time").value;
+  let tph = (ton / time) * 60;
+  document.getElementById("res1").innerText = tph.toFixed(2) + " Ton/hr";
 }
 
-// 🎤 AI SPEECH CHECK
-function checkSpeech() {
-  let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-  recognition.lang = "en-US";
-
-  recognition.onresult = function(e) {
-    let spoken = e.results[0][0].transcript;
-    let correct = levels.day1[currentIndex];
-
-    aiCorrection(spoken, correct);
-  };
-
-  recognition.start();
+function calcSuperheat() {
+  let tap = document.getElementById("tap").value;
+  let tundish = document.getElementById("tundish").value;
+  let sh = tap - tundish;
+  document.getElementById("res2").innerText = sh + " °C";
 }
 
-// 🤖 AI CORRECTION
-async function aiCorrection(spoken, correct) {
-  try {
-    let res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + API_KEY
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          {
-            role: "user",
-            content: `User said: "${spoken}". Correct sentence: "${correct}". Give score out of 100 and correction.`
-          }
-        ]
-      })
-    });
+function calcUnit() {
+  let u = document.getElementById("unit").value;
+  let m = document.getElementById("metal").value;
+  document.getElementById("res3").innerText = (u/m).toFixed(2) + " Unit/Ton";
+}
 
-    let data = await res.json();
-    let output = data.choices[0].message.content;
+// 📘 KNOWLEDGE
+function showKnow() {
+  document.getElementById("content").innerHTML = `
+  <div class="box">
+    <h3>Superheat</h3>
+    <p>Ideal: 20–30°C</p>
 
-    document.getElementById("score").innerText = output;
+    <h3>Casting Speed</h3>
+    <p>High speed → cracks</p>
+    <p>Low speed → low production</p>
 
-  } catch (err) {
-    document.getElementById("score").innerText = "Offline mode (AI unavailable)";
+    <h3>Nozzle Choking</h3>
+    <p>Cause: Low temp / inclusion</p>
+    <p>Solution: Increase temp</p>
+
+    <h3>Cooling</h3>
+    <p>High cooling → cracks</p>
+    <p>Low cooling → bulging</p>
+  </div>`;
+}
+
+// ⚠️ DEFECT ENGINE
+function showDefect() {
+  document.getElementById("content").innerHTML = `
+  <div class="box">
+    <button onclick="defect('crack')">Crack</button>
+    <button onclick="defect('slag')">Slag</button>
+    <button onclick="defect('choking')">Choking</button>
+
+    <p id="def"></p>
+  </div>`;
+}
+
+function defect(type) {
+  let text = "";
+
+  if(type=="crack"){
+    text = "Cause: High temp / low cooling\nSolution: Reduce temp & increase cooling";
   }
-}
-
-// 🔥 AI TRANSLATE (Hindi → English)
-async function translate() {
-  let input = document.getElementById("input").value;
-
-  try {
-    let res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + API_KEY
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          {
-            role: "user",
-            content: `Translate this to English and Tamil: "${input}"`
-          }
-        ]
-      })
-    });
-
-    let data = await res.json();
-    let output = data.choices[0].message.content;
-
-    document.getElementById("en").innerText = output;
-
-  } catch (err) {
-    document.getElementById("en").innerText = "Offline mode";
+  if(type=="slag"){
+    text = "Cause: Dirty metal\nSolution: Improve slag practice";
   }
-      }
+  if(type=="choking"){
+    text = "Cause: Low temp\nSolution: Increase superheat";
+  }
+
+  document.getElementById("def").innerText = text;
+}
