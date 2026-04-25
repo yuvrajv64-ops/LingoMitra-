@@ -108,6 +108,21 @@ if(x==5) text="Blow hole: Gas → Improve refining";
 document.getElementById("def").innerText=text;
 }
 
+function showDefect(type){
+
+let d = defects[type];
+
+document.getElementById("defDetail").innerHTML = `
+<h3>${d.title}</h3>
+
+<img src="${d.img}" width="100%">
+
+<p><b>Cause:</b> ${d.cause}</p>
+<p><b>Effect:</b> ${d.effect}</p>
+<p><b>Solution:</b> ${d.solution}</p>
+`;
+}
+
 const defects = {
 
 crack: {
