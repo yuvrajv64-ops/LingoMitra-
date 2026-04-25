@@ -3,27 +3,24 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MeltingPro+</title>
-<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: Arial; background:#0f172a; color:white; padding:15px;}
+button { padding:10px; margin:5px; width:100%; background:#22c55e; color:white; border:none;}
+.box { background:#1e293b; padding:10px; margin-top:10px;}
+input { width:100%; padding:8px; margin:5px 0;}
+</style>
 </head>
 
 <body>
 
-<h1>🔥 MeltingPro+</h1>
-<p>Steel Plant Smart Assistant</p>
+<h2>🔥 MeltingPro+ (CCM)</h2>
 
-<textarea id="input" placeholder="Hindi me likho (e.g. मशीन बंद है)..."></textarea>
+<button onclick="showCalc()">📊 Calculators</button>
+<button onclick="showKnow()">📘 Knowledge</button>
+<button onclick="showDefect()">⚠️ Defects</button>
 
-<br>
+<div id="content"></div>
 
-<button onclick="translate()">Translate</button>
-
-<div class="output">
-<h3>English Output:</h3>
-<p id="en"></p>
-</div>
-
-<script src="data.js"></script>
 <script src="app.js"></script>
-
 </body>
 </html>
