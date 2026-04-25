@@ -64,3 +64,41 @@ r4.innerText=l.toFixed(2)+" %";
 function timecalc(){
 r5.innerText=((metal.value/speedm.value)*60).toFixed(1)+" min";
 }
+
+function knowMenu(){
+document.getElementById("main").innerHTML=`
+<div class="card">
+<h3>CCM Basics</h3>
+<p>Superheat: 20–30°C</p>
+<p>High speed → cracks</p>
+<p>Low speed → low production</p>
+</div>
+`;
+}
+
+function defectMenu(){
+document.getElementById("main").innerHTML=`
+
+<div class="card">
+<button onclick="d(1)">Crack</button>
+<button onclick="d(2)">Surface Slag</button>
+<button onclick="d(3)">Porosity</button>
+<button onclick="d(4)">Pin Hole</button>
+<button onclick="d(5)">Blow Hole</button>
+
+<p id="def"></p>
+</div>
+`
+}
+
+function d(x){
+let text="";
+
+if(x==1) text="Crack: High temp / low cooling → Reduce temp, increase cooling";
+if(x==2) text="Slag: Dirty metal → Improve slag practice";
+if(x==3) text="Porosity: Gas → Proper deoxidation";
+if(x==4) text="Pin hole: Hydrogen → Dry material";
+if(x==5) text="Blow hole: Gas → Improve refining";
+
+document.getElementById("def").innerText=text;
+}
